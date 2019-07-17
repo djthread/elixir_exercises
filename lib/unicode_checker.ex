@@ -17,10 +17,10 @@ defmodule UnicodeChecker do
 
   """
   @spec valid?(binary) :: boolean
-  def valid?(<<0::size(1), _::size(7), rest::binary>>), do: valid?(rest)
-  def valid?(<<6::size(3), _::size(5), 2::size(2), _::size(6), rest::binary>>), do: valid?(rest)
-  def valid?(<<14::size(4), _::size(4), 2::size(2), _::size(6), 2::size(2), _::size(6), rest::binary>>), do: valid?(rest)
-  def valid?(<<30::size(5), _::size(3), 2::size(2), _::size(6), 2::size(2), _::size(6), 2::size(2), _::size(6), rest::binary>>), do: valid?(rest)
+  def valid?(<<0::1, _::7, rest::binary>>), do: valid?(rest)
+  def valid?(<<6::3, _::5, 2::2, _::6, rest::binary>>), do: valid?(rest)
+  def valid?(<<14::4, _::4, 2::2, _::6, 2::2, _::6, rest::binary>>), do: valid?(rest)
+  def valid?(<<30::5, _::3, 2::2, _::6, 2::2, _::6, 2::2, _::6, rest::binary>>), do: valid?(rest)
   def valid?(<<>>), do: true
   def valid?(_), do: false
 
