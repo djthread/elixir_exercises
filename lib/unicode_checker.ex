@@ -17,46 +17,12 @@ defmodule UnicodeChecker do
 
   """
   @spec valid?(binary) :: boolean
-  def valid?(<<front, rest::binary>>) do
-    case to_bin(front) do
-      "0" <> _ ->
-        valid?(rest)
-
-      "11110" <> _ ->
-        <<a, b, c, the_rest::binary>> = rest
-        valid_sub_bytes([a, b, c]) and valid?(the_rest)
-
-      "1110" <> _ ->
-        <<a, b, the_rest::binary>> = rest
-        valid_sub_bytes([a, b]) and valid?(the_rest)
-
-      "110" <> _ ->
-        <<a, the_rest::binary>> = rest
-        valid_sub_bytes([a]) and valid?(the_rest)
-    end
-  end
-
+  def valid?(<<0::size(1), _::size(7), rest::binary>>), do: valid?(rest)
+  def valid?(<<6::size(3), _::size(5), 2::size(2), _::size(6), rest::binary>>), do: valid?(rest)
+  def valid?(<<14::size(4), _::size(4), 2::size(2), _::size(6), 2::size(2), _::size(6), rest::binary>>), do: valid?(rest)
+  def valid?(<<30::size(5), _::size(3), 2::size(2), _::size(6), 2::size(2), _::size(6), 2::size(2), _::size(6), rest::binary>>), do: valid?(rest)
   def valid?(<<>>), do: true
-
   def valid?(_), do: false
-
-  defp valid_sub_bytes(list) do
-    Enum.reduce_while(list, true, fn x, _acc ->
-      if "10" == x |> to_bin() |> String.slice(0, 2),
-        do: {:cont, true},
-        else: {:halt, false}
-    end)
-  end
-
-  @doc """
-  Converts an integer to a binary-formatted string
-
-  iex> UnicodeChecker.to_bin(107)
-  "01101011"
-  """
-  def to_bin(int) do
-    int |> Integer.to_string(2) |> String.pad_leading(8, "0")
-  end
 
   @doc """
   Method 2: Returns true if the given byte sequence is valid unicode. False,
