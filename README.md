@@ -2,7 +2,7 @@
 
 Checks byte sequences for unicode validity
 
-[Original problem](https://git.rockfin.com/raw/gist/jalchy/ac8f06ada7c00012df9d9ded6299eccb/raw/d23330e5a934a971691457990a6a4cd2c1552323/problem.md):
+## Original problem:
 
 A character in UTF8 can be from 1 to 4 bytes long, subjected to the following rules:
 
@@ -41,3 +41,10 @@ The first 3 bits are all one's and the 4th bit is 0 means it is a 3-bytes charac
 The next byte is a continuation byte which starts with 10 and that's correct.
 But the second continuation byte does not start with 10, so it is invalid.
 ```
+
+## Elixir Solution
+
+This repo is my Elixir solution. [unicode_checker.ex](lib/unicode_checker.ex)
+is the source file and
+[unicode_checker_test.exs](test/unicode_checker_test.exs) is the unit test
+file.
