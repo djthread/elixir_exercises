@@ -15,6 +15,9 @@ defmodule UnicodeChecker do
     iex> <<235, 140, 4>> |> UnicodeChecker.valid?()
     false
 
+    iex> <<248, 1, 1, 1, 1, 1>> |> UnicodeChecker.valid?()
+    false
+
   """
   @spec valid?(binary) :: boolean
   def valid?(<<0::1, _::7, rest::binary>>), do: valid?(rest)
