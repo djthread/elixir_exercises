@@ -1,8 +1,6 @@
 # ElixirExercises
 
-1. Unicode Checker
-
-Checks byte sequences for unicode validity
+1. Unicode Checker - Checks byte sequences for unicode validity
 
 ## 1. Unicode Checker
 
