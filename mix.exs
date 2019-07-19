@@ -1,9 +1,9 @@
-defmodule UnicodeChecker.MixProject do
+defmodule ElixirExercises.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :unicode_checker,
+      app: :elixir_exercises,
       version: "0.1.0",
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
